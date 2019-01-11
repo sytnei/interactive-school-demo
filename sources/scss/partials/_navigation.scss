@@ -11,16 +11,59 @@ nav {
         height: 100vh;
         background: $color--white;
         display: block;
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         z-index: 999;
+        opacity: 0.6;
         content: "";
         display: none;
     }
-    ul {
+    >ul {
         display: none;
-        >li {}
+        z-index: 999999;
+        position: fixed;
+        width: 50%;
+        box-sizing: border-box;
+        background: $color--white;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        padding: 100px 60px 60px 60px;
+        -webkit-box-shadow: 22px 0 32px -10px $color--gray;
+        box-shadow: 22px 0 32px -10px $color--gray;
+        >li {
+            list-style: none;
+            border-bottom: 1px solid $color--gray-light;
+            a {
+                font-family: $font__family--arial;
+                text-transform: uppercase;
+                color: $color--gray;
+                font-size: 18px;
+                text-decoration: none;
+                display: block;
+                padding: 26px 0 8px 0;
+                &:after {
+                    content: "+";
+                    width: 20px;
+                    height: 20px;
+                    right: 0;
+                    display: block;
+                    float: right;
+                }
+                &:hover,
+                &:focus {
+                    color: $color--red;
+                    &:after {
+                        color: $color--red;
+                    }
+                }
+            }
+            >ul {
+                display: none;
+                >li {}
+            }
+        }
     }
     .btn {
         &--nav {
@@ -31,7 +74,7 @@ nav {
             padding-left: 40px;
             position: relative;
             text-decoration: none;
-            z-index: 999999;
+            z-index: 9999999;
             strong {
                 font-weight: normal;
                 text-transform: uppercase;
@@ -94,6 +137,7 @@ nav {
         }
     }
     &.opened {
+        position: fixed;
         .btn {
             &--nav {
                 color: $color--red;
@@ -127,7 +171,7 @@ nav {
         &:after {
             display: block;
         }
-        ul {
+        >ul {
             display: block;
         }
     }

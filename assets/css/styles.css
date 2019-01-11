@@ -117,14 +117,51 @@ nav {
     height: 100vh;
     background: #ffffff;
     display: block;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 999;
+    opacity: 0.6;
     content: "";
     display: none; }
-  nav ul {
-    display: none; }
+  nav > ul {
+    display: none;
+    z-index: 999999;
+    position: fixed;
+    width: 50%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    background: #ffffff;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    padding: 100px 60px 60px 60px;
+    -webkit-box-shadow: 22px 0 32px -10px #464646;
+    box-shadow: 22px 0 32px -10px #464646; }
+    nav > ul > li {
+      list-style: none;
+      border-bottom: 1px solid #ececec; }
+      nav > ul > li a {
+        font-family: Arial, Helvetica, sans-serif;
+        text-transform: uppercase;
+        color: #464646;
+        font-size: 18px;
+        text-decoration: none;
+        display: block;
+        padding: 26px 0 8px 0; }
+        nav > ul > li a:after {
+          content: "+";
+          width: 20px;
+          height: 20px;
+          right: 0;
+          display: block;
+          float: right; }
+        nav > ul > li a:hover, nav > ul > li a:focus {
+          color: #c20040; }
+          nav > ul > li a:hover:after, nav > ul > li a:focus:after {
+            color: #c20040; }
+      nav > ul > li > ul {
+        display: none; }
   nav .btn--nav {
     font-family: "TrajanPro";
     color: #ffffff;
@@ -133,7 +170,7 @@ nav {
     padding-left: 40px;
     position: relative;
     text-decoration: none;
-    z-index: 999999; }
+    z-index: 9999999; }
     nav .btn--nav strong {
       font-weight: normal;
       text-transform: uppercase; }
@@ -178,29 +215,31 @@ nav {
           -webkit-transform-origin: left center;
           -ms-transform-origin: left center;
               transform-origin: left center; }
-  nav.opened .btn--nav {
-    color: #c20040; }
-    nav.opened .btn--nav > span > span {
-      background: #c20040; }
-      nav.opened .btn--nav > span > span:nth-child(1) {
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
-        top: -3px;
-        left: 8px; }
-      nav.opened .btn--nav > span > span:nth-child(2) {
-        width: 0%;
-        opacity: 0; }
-      nav.opened .btn--nav > span > span:nth-child(3) {
-        -webkit-transform: rotate(-45deg);
-        -ms-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-        top: 18px;
-        left: 8px; }
-  nav.opened:after {
-    display: block; }
-  nav.opened ul {
-    display: block; }
+  nav.opened {
+    position: fixed; }
+    nav.opened .btn--nav {
+      color: #c20040; }
+      nav.opened .btn--nav > span > span {
+        background: #c20040; }
+        nav.opened .btn--nav > span > span:nth-child(1) {
+          -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+              transform: rotate(45deg);
+          top: -3px;
+          left: 8px; }
+        nav.opened .btn--nav > span > span:nth-child(2) {
+          width: 0%;
+          opacity: 0; }
+        nav.opened .btn--nav > span > span:nth-child(3) {
+          -webkit-transform: rotate(-45deg);
+          -ms-transform: rotate(-45deg);
+              transform: rotate(-45deg);
+          top: 18px;
+          left: 8px; }
+    nav.opened:after {
+      display: block; }
+    nav.opened > ul {
+      display: block; }
 
 header {
   background: url(../img/bg_header.png) no-repeat center;
