@@ -29,8 +29,8 @@
 /*---------------------- Pixels to Rem ---------------*/
 @font-face {
   font-family: 'TrajanPro';
-  src: url("../assets/fonts/TrajanPro-Regular.eot");
-  src: url("../assets/fonts/TrajanPro-Regular.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/TrajanPro-Regular.woff2") format("woff2"), url("../assets/fonts/TrajanPro-Regular.woff") format("woff"), url("../assets/fonts/TrajanPro-Regular.ttf") format("truetype");
+  src: url("../fonts/TrajanPro-Regular.eot");
+  src: url("../fonts/TrajanPro-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/TrajanPro-Regular.woff2") format("woff2"), url("../fonts/TrajanPro-Regular.woff") format("woff"), url("../fonts/TrajanPro-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
 
@@ -103,6 +103,132 @@ strong {
 
 /* PARTIALS
 -------------------------------------------------------------------------------- */
+nav {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100px;
+  padding: 38px 30px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  z-index: 99; }
+  nav:after {
+    width: 100%;
+    height: 100vh;
+    background: #ffffff;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    content: "";
+    display: none; }
+  nav ul {
+    display: none; }
+  nav .btn--nav {
+    font-family: "TrajanPro";
+    color: #ffffff;
+    font-size: 20px;
+    text-transform: uppercase;
+    padding-left: 40px;
+    position: relative;
+    text-decoration: none;
+    z-index: 999999; }
+    nav .btn--nav strong {
+      font-weight: normal;
+      text-transform: uppercase; }
+    nav .btn--nav > span {
+      width: 30px;
+      height: 20px;
+      position: absolute;
+      top: 2px;
+      left: 0;
+      display: block;
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+          transform: rotate(0deg);
+      -webkit-transition: .5s ease-in-out;
+      transition: .5s ease-in-out;
+      cursor: pointer; }
+      nav .btn--nav > span > span {
+        display: block;
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        background: #ffffff;
+        opacity: 1;
+        left: 0;
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
+        -webkit-transition: .25s ease-in-out;
+        transition: .25s ease-in-out; }
+        nav .btn--nav > span > span:nth-child(1) {
+          top: 0px;
+          -webkit-transform-origin: left center;
+          -ms-transform-origin: left center;
+              transform-origin: left center; }
+        nav .btn--nav > span > span:nth-child(2) {
+          top: 9px;
+          -webkit-transform-origin: left center;
+          -ms-transform-origin: left center;
+              transform-origin: left center; }
+        nav .btn--nav > span > span:nth-child(3) {
+          top: 18px;
+          -webkit-transform-origin: left center;
+          -ms-transform-origin: left center;
+              transform-origin: left center; }
+  nav.opened .btn--nav {
+    color: #c20040; }
+    nav.opened .btn--nav > span > span {
+      background: #c20040; }
+      nav.opened .btn--nav > span > span:nth-child(1) {
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        top: -3px;
+        left: 8px; }
+      nav.opened .btn--nav > span > span:nth-child(2) {
+        width: 0%;
+        opacity: 0; }
+      nav.opened .btn--nav > span > span:nth-child(3) {
+        -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        top: 18px;
+        left: 8px; }
+  nav.opened:after {
+    display: block; }
+  nav.opened ul {
+    display: block; }
+
+header {
+  background: url(../img/bg_header.png) no-repeat center;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover; }
+  header .logo {
+    font-family: "TrajanPro";
+    position: relative;
+    font-size: 34px;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #ffffff;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    width: 250px;
+    height: 70px;
+    margin: 34px auto; }
+
+#section1 {
+  width: 100%;
+  min-height: 2000px;
+  background: #cccccc; }
+
 /* PRINT
 -------------------------------------------------------------------------------- */
 /* ----------------------------------------------------

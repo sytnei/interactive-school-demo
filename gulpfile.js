@@ -122,7 +122,7 @@ gulp.task("watch", () => {
 gulp.task("scripts", () => {
 
     return gulp.src([
-            paths.srcJs + "jquery-3.3.1.min.js",
+            paths.nodeModules + "/jquery/dist/jquery.min.js",
             paths.srcJs + "scripts.js"
         ])
         .pipe(concat('scripts.js'))
