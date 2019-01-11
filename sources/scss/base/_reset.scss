@@ -1,0 +1,64 @@
+/* FRAME
+-------------------------------------------------------------------------------- */
+
+* {
+    outline-style: none;
+}
+
+html {
+    font-size: $font__size--base;
+}
+
+body,
+html {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: $color--white;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1.4rem;
+}
+
+
+/* ELEMENTS
+-------------------------------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    a {
+        color: inherit;
+        text-decoration: none;
+        &:focus,
+        &:hover {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+}
+
+p,
+ul,
+ol {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+b,
+strong {
+    font-weight: bold;
+}
