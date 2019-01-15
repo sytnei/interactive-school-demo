@@ -14,13 +14,15 @@ nav {
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 999;
-        opacity: 0.6;
+        z-index: 995;
+        opacity: 0;
         content: "";
-        display: none;
+        -webkit-transition: .5s all;
+        -moz-transition: .5s all;
+        -o-transition: .5s all;
+        transition: .5s all;
     }
     >ul {
-        display: none;
         z-index: 999999;
         position: fixed;
         width: 50%;
@@ -28,10 +30,22 @@ nav {
         background: $color--white;
         height: 100vh;
         top: 0;
-        left: 0;
-        padding: 100px 60px 60px 60px;
-        -webkit-box-shadow: 22px 0 32px -10px $color--gray;
-        box-shadow: 22px 0 32px -10px $color--gray;
+        padding: 60px;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        -webkit-box-shadow: 12px 0 32px -10px #888888;
+        box-shadow: 12px 0 32px -10px #888888;
+        z-index: 997;
+        -webkit-transition: 1s all;
+        -moz-transition: 1s all;
+        -o-transition: 1s all;
+        transition: 1s all;
+        left: -100%;
+        &:nth-of-type(2) {
+            left: initial;
+            right: 100%;
+        }
         >li {
             list-style: none;
             border-bottom: 1px solid $color--gray-light;
@@ -42,20 +56,32 @@ nav {
                 font-size: 18px;
                 text-decoration: none;
                 display: block;
-                padding: 26px 0 8px 0;
+                padding: 21px 0 2px 0;
+                letter-spacing: 1.5px;
                 &:after {
-                    content: "+";
                     width: 20px;
                     height: 20px;
                     right: 0;
                     display: block;
                     float: right;
+                    font-size: 17px;
+                    text-align: center;
                 }
-                &:hover,
-                &:focus {
+                &:hover {
                     color: $color--red;
                     &:after {
                         color: $color--red;
+                    }
+                }
+                &.has-child {
+                    &:after {
+                        content: "+";
+                    }
+                    &--expanded {
+                        color: $color--red;
+                        &:after {
+                            content: "-";
+                        }
                     }
                 }
             }
@@ -64,9 +90,23 @@ nav {
                 >li {}
             }
         }
+        &:nth-of-type(2) {
+            position: absolute;
+            left: 0;
+            z-index: 996;
+            li {
+                border: 0;
+                a {
+                    font-size: 15px;
+                    padding: 12px;
+                    letter-spacing: 1px;
+                }
+            }
+        }
     }
     .btn {
-        &--nav {
+        &--nav,
+        &--nav-close-submenu {
             font-family: $font__family--trajan-pro;
             color: $color--white;
             font-size: 20px;
@@ -139,7 +179,8 @@ nav {
     &.opened {
         position: fixed;
         .btn {
-            &--nav {
+            &--nav,
+            &--nav-close-submenu {
                 color: $color--red;
                 >span {
                     >span {
@@ -167,12 +208,71 @@ nav {
                     }
                 }
             }
+            &--nav-close-submenu {
+                position: absolute;
+                right: 40px;
+                >span {
+                    >span {
+                        background: $color--gray--button-text;
+                    }
+                }
+            }
         }
         &:after {
             display: block;
+            opacity: 0.6;
         }
         >ul {
-            display: block;
+            display: flex;
+            left: 0;
+            &:nth-of-type(2) {
+                left: initial;
+                right: 100%;
+            }
+        }
+    }
+}
+
+
+/*************************************************************
+**************** Responsivnes 300 <> 768 ********************
+**************************************************************/
+
+@media (min-width:300px) and (max-width:769px) {
+    nav {
+        >ul {
+            width: 100%;
+            li {
+                a {
+                    font-size: 20px;
+                    &:after {
+                        font-size: 20px;
+                    }
+                }
+            }
+            &:nth-of-type(2) {
+                width: 100%;
+                z-index: 998;
+                left: 0;
+                li {
+                    a {
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/*************************************************************
+**************** Responsivnes 300 <> 480 ********************
+**************************************************************/
+
+@media (min-width:300px) and (max-width:480px) {
+    nav {
+        >ul {
+            padding: 30px 15px;
         }
     }
 }
