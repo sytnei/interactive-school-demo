@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test URLS</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        (function() {
+            var keys1 = {},
+                maxKeyStep1 = "",
+                keys2 = {},
+                numbers3 = [],
+                key4 = '',
+                key5 = '';
+            $(document).ready(function() {
+
+                get_step1_keys();
+
+            });
+
+            function addMessage(message) {
+                $('#messages').append("===============================================<br />");
+                $('#messages').append(message + "<br />");
+                $('#messages').append("===============================================<br />");
+            }
+
+            function get_step1_keys(tryStep = 1) {
+
+                addMessage("Step1: Getting step1 keys");
+
+                $.ajax({
+                        url: "https://intschools-javascript-test.firebaseapp.com/getKey"
+                    })
+                    .done(function(data) {
+
+                        keys1 = data;
+                        var message = "Step 1: Try " + tryStep + " I've got the following data: <br />";
+                        Object.entries(keys1).forEach(([dk, dv]) => {
+                            message += 'Key:' + dk + " | Val:" + dv + "<br />";
+                        });
+
+                        addMessage(message);
+                        get_step2_keys();
+
+                    }).fail(function() {
+                        if (tryStep > 3) {
+                            addMessage("Step1: I tryed 3 times to get data on step 1. We stop.");
+                            return false;
+                        }
+                        addMessage("Step1: Failed to get data on Step1 Try" + tryStep);
+                        tryStep++;
+                        setTimeout(function() {
+                            get_step1_keys(tryStep);
+                            console.log("Dellay 2000ms");
+                        }, 2000);
+                    });
+            }
+
+            function get_step2_keys(tryStep = 1) {
+
+                if (tryStep == 1) {
+                    addMessage("Step2: Getting step2 keys");
+
+                    if (!Object.keys(keys1).length) {
+                        addMessage("Step2: We don't start step 2. We don't have data");
+                        return false;
+                    }
+
+                    maxKeyStep1 = function() {
+                        var maxKey = '',
+                            maxNumber = 0;
+                        Object.entries(keys1).forEach(([dk, dv]) => {
+                            if (maxNumber < dv) {
+                                maxKey = dk;
+                                maxNumber = dv;
+                            }
+                        });
+                        addMessage("Step2: I get max key " + maxKey);
+                        return maxKey;
+                    }();
+                }
+
+
+                if (maxKeyStep1 != '') {
+                    $.ajax({
+                            url: "https://intschools-javascript-test.firebaseapp.com/getKey?key=" + maxKeyStep1 + "&stage=1"
+                        })
+                        .done(function(data) {
+
+                            keys2 = data;
+                            var message = "Step 2: Try " + tryStep + " I've got the following data: <br />";
+                            Object.entries(keys2).forEach(([dk, dv]) => {
+                                message += 'Key:' + dk + " | Val:" + dv + "<br />";
+                            });
+
+                            addMessage(message);
+                            get_step3_numbers();
+
+                        }).fail(function() {
+                            if (tryStep > 3) {
+                                addMessage("Step2: I tryed 3 times to get data on step 2. We stop.");
+                                return false;
+                            }
+                            addMessage("Step2: Failed to get data on Step2 Try" + tryStep);
+                            tryStep++;
+
+                            setTimeout(function() {
+                                get_step2_keys(tryStep);
+                                console.log("Dellay 2000ms");
+                            }, 2000);
+                        });
+                }
+            }
+
+            function get_step3_numbers(tryStep = 1) {
+
+                Object.entries(keys2).forEach(([dk, dv]) => {
+                    get_step3_data(dv, tryStep);
+                });
+            }
+
+            function get_step3_data(key, tryStep) {
+                $.ajax({
+                        url: "https://intschools-javascript-test.firebaseapp.com/getKey?key=" + key + "&stage=2"
+                    })
+                    .done(function(data) {
+
+                        var message = "Step 3: Try " + tryStep + " I've got the following data: " + data + "<br />";
+                        numbers3.push(parseInt(data));
+
+                        addMessage(message);
+
+                        console.log(numbers3.length);
+
+                        if (numbers3.length == 5) {
+                            get_step4_key();
+                        }
+
+                    }).fail(function() {
+                        if (tryStep > 3) {
+                            addMessage("Step3: I tryed 3 times to get data on step 3. We stop.");
+                            return false;
+                        }
+                        addMessage("Step3: Failed to get data on Step3 Try" + tryStep);
+                        tryStep++;
+
+                        setTimeout(function() {
+                            get_step3_data(key, tryStep);
+                            console.log("Dellay 2000ms");
+                        }, 2000);
+                    });
+
+
+            }
+
+
+            function get_step4_key(tryStep = 1) {
+
+                /*max number Doesn't work
+                let maxKeyIndex = numbers3.indexOf(Math.max(...numbers3));
+				let maxKey = keys2[maxKeyIndex];*/
+                for (var i = 0; i < 5; i++) {
+                    maxKey = keys2[i]
+                    get_step4_data(maxKey, tryStep);
+                }
+
+            }
+
+            function get_step4_data(key, tryStep) {
+                $.ajax({
+                        url: "https://intschools-javascript-test.firebaseapp.com/getKey?key=" + key + "&stage=3"
+                    })
+                    .done(function(data) {
+
+                        var message = "Step 4: Try " + tryStep + " I've got the following data: " + data + "<br />";
+                        key5 = data;
+
+                        get_step5_data(key5, 1);
+                        addMessage(message);
+
+                    }).fail(function() {
+                        if (tryStep > 2) {
+                            addMessage("Step4: I tryed 3 times to get data on step4. We stop.");
+                            return false;
+                        }
+                        addMessage("Step4: Failed to get data on Step4 Try" + tryStep);
+                        tryStep++;
+
+                        setTimeout(function() {
+                            get_step4_data(key, tryStep);
+                            console.log("Dellay 2000ms");
+                        }, 2000);
+                    });
+
+
+            }
+
+
+            function get_step5_data(key, tryStep = 1) {
+                $.ajax({
+                        url: "https://intschools-javascript-test.firebaseapp.com/getKey?key=" + key + "&stage=4"
+                    })
+                    .done(function(data) {
+
+
+
+                        if (data.indexOf("Success") > -1) {
+                            addMessage(" ====== SUCCESSS! ====== We completed the script with key: " + key5);
+                        } else {
+                            var message = "Step 5: Try " + tryStep + " I've got the following data: " + data + "<br />";
+                            key5 = data;
+                            get_step5_data(key5, 1);
+                            addMessage(message);
+                        }
+
+                    }).fail(function() {
+                        if (tryStep > 5) {
+                            addMessage("Step 5: I tryed 3 times to get data on step 1. We stop.");
+                            return false;
+                        }
+                        addMessage("Step 5: Failed to get data on Step5 Try" + tryStep);
+                        tryStep++;
+                        setTimeout(function() {
+                            get_step5_data(key, tryStep);
+                            console.log("Dellay 2000ms");
+                        }, 2000);
+                    });
+            }
+
+        })();
+        /*Step 1 get first keys*/
+    </script>
+</head>
+
+<body>
+    <div id="messages"></div>
+    </body
