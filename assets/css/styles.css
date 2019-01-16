@@ -111,7 +111,11 @@ nav {
   padding: 38px 30px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  z-index: 99; }
+  z-index: 99;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+  /*sticky state, when we do scroll in the page we change the header*/
+  /*opened state, when we open the top menu*/ }
   nav:after {
     width: 100%;
     height: 100vh;
@@ -152,7 +156,7 @@ nav {
     z-index: 997;
     -webkit-transition: 1s all;
     transition: 1s all;
-    left: -100%; }
+    left: -130%; }
     nav > ul:nth-of-type(2) {
       left: initial;
       right: 100%; }
@@ -198,23 +202,24 @@ nav {
           font-size: 15px;
           padding: 12px;
           letter-spacing: 1px; }
-  nav .btn--nav, nav .btn--nav-close-submenu {
+  nav a.btn--nav, nav a.btn--nav-close-submenu {
     font-family: "TrajanPro";
     color: #ffffff;
-    font-size: 20px;
+    font-size: 18px;
     text-transform: uppercase;
     padding-left: 40px;
     position: relative;
     text-decoration: none;
     z-index: 9999999; }
-    nav .btn--nav strong, nav .btn--nav-close-submenu strong {
+    nav a.btn--nav strong, nav a.btn--nav-close-submenu strong {
       font-weight: normal;
-      text-transform: uppercase; }
-    nav .btn--nav > span, nav .btn--nav-close-submenu > span {
+      text-transform: uppercase;
+      font-size: 18px; }
+    nav a.btn--nav > span, nav a.btn--nav-close-submenu > span {
       width: 30px;
       height: 20px;
       position: absolute;
-      top: 2px;
+      top: 0;
       left: 0;
       display: block;
       -webkit-transform: rotate(0deg);
@@ -223,7 +228,7 @@ nav {
       -webkit-transition: .5s ease-in-out;
       transition: .5s ease-in-out;
       cursor: pointer; }
-      nav .btn--nav > span > span, nav .btn--nav-close-submenu > span > span {
+      nav a.btn--nav > span > span, nav a.btn--nav-close-submenu > span > span {
         display: block;
         position: absolute;
         height: 2px;
@@ -236,47 +241,87 @@ nav {
             transform: rotate(0deg);
         -webkit-transition: .25s ease-in-out;
         transition: .25s ease-in-out; }
-        nav .btn--nav > span > span:nth-child(1), nav .btn--nav-close-submenu > span > span:nth-child(1) {
+        nav a.btn--nav > span > span:nth-child(1), nav a.btn--nav-close-submenu > span > span:nth-child(1) {
           top: 0px;
           -webkit-transform-origin: left center;
           -ms-transform-origin: left center;
               transform-origin: left center; }
-        nav .btn--nav > span > span:nth-child(2), nav .btn--nav-close-submenu > span > span:nth-child(2) {
+        nav a.btn--nav > span > span:nth-child(2), nav a.btn--nav-close-submenu > span > span:nth-child(2) {
           top: 9px;
           -webkit-transform-origin: left center;
           -ms-transform-origin: left center;
               transform-origin: left center; }
-        nav .btn--nav > span > span:nth-child(3), nav .btn--nav-close-submenu > span > span:nth-child(3) {
+        nav a.btn--nav > span > span:nth-child(3), nav a.btn--nav-close-submenu > span > span:nth-child(3) {
           top: 18px;
           -webkit-transform-origin: left center;
           -ms-transform-origin: left center;
               transform-origin: left center; }
+  nav a.share {
+    display: none;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background: url(../img/icon_share_header.png) no-repeat center;
+    top: 0;
+    left: 148px;
+    z-index: 9999999; }
+    nav a.share .gauge-svg {
+      position: relative;
+      top: 0px;
+      left: 10px;
+      -webkit-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
+              transform: rotate(180deg); }
+    nav a.share .gauge-path {
+      stroke-width: 2;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000; }
+  nav.sticky {
+    position: fixed;
+    background: #ffffff;
+    height: 50px;
+    padding: 13px 30px;
+    -webkit-box-shadow: 10px -5px 34px 7px #888888;
+    box-shadow: 10px -5px 34px 7px #888888; }
+    nav.sticky .btn--nav strong {
+      color: #464646; }
+    nav.sticky .btn--nav > span > span {
+      background: #464646; }
+    nav.sticky a.share {
+      display: block; }
   nav.opened {
-    position: fixed; }
-    nav.opened .btn--nav, nav.opened .btn--nav-close-submenu {
+    position: fixed;
+    height: 100px;
+    padding: 38px 30px;
+    background: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+    nav.opened a.btn--nav strong, nav.opened a.btn--nav-close-submenu strong {
       color: #c20040; }
-      nav.opened .btn--nav > span > span, nav.opened .btn--nav-close-submenu > span > span {
-        background: #c20040; }
-        nav.opened .btn--nav > span > span:nth-child(1), nav.opened .btn--nav-close-submenu > span > span:nth-child(1) {
-          -webkit-transform: rotate(45deg);
-          -ms-transform: rotate(45deg);
-              transform: rotate(45deg);
-          top: -3px;
-          left: 8px; }
-        nav.opened .btn--nav > span > span:nth-child(2), nav.opened .btn--nav-close-submenu > span > span:nth-child(2) {
-          width: 0%;
-          opacity: 0; }
-        nav.opened .btn--nav > span > span:nth-child(3), nav.opened .btn--nav-close-submenu > span > span:nth-child(3) {
-          -webkit-transform: rotate(-45deg);
-          -ms-transform: rotate(-45deg);
-              transform: rotate(-45deg);
-          top: 18px;
-          left: 8px; }
-    nav.opened .btn--nav-close-submenu {
+    nav.opened a.btn--nav > span > span, nav.opened a.btn--nav-close-submenu > span > span {
+      background: #c20040; }
+      nav.opened a.btn--nav > span > span:nth-child(1), nav.opened a.btn--nav-close-submenu > span > span:nth-child(1) {
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        top: -3px;
+        left: 8px; }
+      nav.opened a.btn--nav > span > span:nth-child(2), nav.opened a.btn--nav-close-submenu > span > span:nth-child(2) {
+        width: 0%;
+        opacity: 0; }
+      nav.opened a.btn--nav > span > span:nth-child(3), nav.opened a.btn--nav-close-submenu > span > span:nth-child(3) {
+        -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        top: 18px;
+        left: 8px; }
+    nav.opened a.btn--nav-close-submenu {
       position: absolute;
       right: 40px; }
-      nav.opened .btn--nav-close-submenu > span > span {
+      nav.opened a.btn--nav-close-submenu > span > span {
         background: #515151; }
+    nav.opened a.share {
+      display: none; }
     nav.opened:after {
       display: block;
       opacity: 0.6; }

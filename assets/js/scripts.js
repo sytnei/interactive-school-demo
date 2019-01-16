@@ -5,8 +5,10 @@
 
     $(document).ready(function() {
         menuButtonToggle();
+        menuSticky();
         submenuToggle();
         submenuButtonClose();
+        menuAnimateShareIcon();
     });
 
     /**
@@ -28,6 +30,34 @@
 
             }
             return false;
+        });
+    }
+
+    /**
+     * Set Sticky navigation
+     */
+
+    function menuSticky() {
+        $(window).scroll(function() {
+            if (jQuery(window).scrollTop() >= 20) {
+                jQuery('nav#main').addClass('sticky');
+            } else {
+                jQuery('nav#main').removeClass('sticky');
+            }
+        });
+    }
+
+    /**
+     * Animate cercle of share icon
+     */
+
+    function menuAnimateShareIcon() {
+        var $dashOffset = $(".gauge-path").css("stroke-dashoffset");
+        $(window).scroll(function() {
+            var $percentageComplete = (($(window).scrollTop() / ($("html").height() - $(window).height())) * 30);
+            var $newUnit = parseInt($dashOffset, 10);
+            var $offsetUnit = $percentageComplete * ($newUnit / 100);
+            $(".gauge-path").css("stroke-dashoffset", $newUnit - $offsetUnit);
         });
     }
 
@@ -65,11 +95,19 @@
         });
     }
 
+    /**
+     * Function used to close submenu
+     */
+
     function submenuButtonClose() {
         $('body').on('click', '.btn--nav-close-submenu', function() {
             submenuClearSelection();
         });
     }
+
+    /**
+     * Function used to clear the submenu, when another item is selected
+     */
 
     function submenuClearSelection() {
 
@@ -81,6 +119,5 @@
         };
 
     }
-
 
 })();
